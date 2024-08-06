@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.example.test1.dto.LoginDto;
 import com.example.test1.dto.MemberDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -33,10 +35,10 @@ public class MainController {
 	}
 	
 	
-	@GetMapping("/aaa.g")
-	public String testTwo() {
-		return "login";
-	}
+//	@GetMapping("/aaa.g")
+//	public String testTwo() {
+//		return "login";
+//	}
 	
 	// 주소 요청 : /signUp
 	// 뷰 페이지 : member/signUp.jsp
@@ -57,6 +59,26 @@ public class MainController {
 		return "member/signUp";
 	}
 	
+	@GetMapping("/login")
+	public String loginPage() {
+		return "login";
+	}
+	
+	@PostMapping("/login")
+    public String loginshow (@ModelAttribute LoginDto logindto) {
+		
+		System.out.println(logindto.getUserId());
+	        
+		return "loginResult";
+	}
+	
+	@GetMapping("/")
+	public ModelAndView home() {
+		String title="뭔가 뭘 까먹었는지 왜 이렇게 불안하냐";
+		ModelAndView mv = new ModelAndView("index");	// ModelAndView 객체 생성하면서 뷰 페이지 입력
+		mv.addObject("pageTitle", title);
+		return mv;
+	}
 	 
 	
 	
@@ -72,7 +94,7 @@ public class MainController {
 //		return "member/signUp";
 //	}
 	
-//	래그 epdlxj qkedkdhsms qkdqjq 1.
+//	form 1.
 //	@PostMapping("/signUp")
 //	public String singUpSave(@RequestParam("id") String id, @RequestParam("pw") String pw, 
 //	@RequestParam("tel") String tel, @RequestParam("birth") 
