@@ -1,9 +1,14 @@
 package com.example.test1.control;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.test1.dto.MemberDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -42,19 +47,57 @@ public class MainController {
 	public String sign() {
 		return "member/signUp";
 	}
-	
-	
-	@PostMapping("/signUp")
-	public String singUpSave(@RequestParam("id") String id, @RequestParam("pw") String pw, @RequestParam("tel") String tel, @RequestParam("birth") 
-	String birth) {
 
+	// form 데이터 받아오는 방법 3. - 두 번째 방법에 비해 범용성은 있지만 데이터 베이스 사용하기에 애매함.
+	@PostMapping("/signUp")
+	public String signUpSave(@RequestParam Map<String, String> pm) {
 		
-		System.out.println(id);
+		System.out.println("세번째 방법 : " + pm.get("id"));
 		
 		return "member/signUp";
 	}
 	
+	 
+	
+	
+	
+//	// form 데이터 받아오는 방법 2 - 데이터 베이스 사용에 용이
+//	
+//	@PostMapping("/signUp")
+//	public String signUpSave(@ModelAttribute MemberDTO memberdto ) {
+//		
+//		
+//		System.out.println("두번째 방법 : " + memberdto.getId());
+//		
+//		return "member/signUp";
+//	}
+	
+//	래그 epdlxj qkedkdhsms qkdqjq 1.
+//	@PostMapping("/signUp")
+//	public String singUpSave(@RequestParam("id") String id, @RequestParam("pw") String pw, 
+//	@RequestParam("tel") String tel, @RequestParam("birth") 
+//	String birth) {
+//
+//		
+//		System.out.println(id);
+//		
+//		return "member/signUp";
+//	}
+	
 }
 
+// 자바빈 : 1. 클래스의 인스턴스 변수는 input의 name과 일치시켜 준다.
+//		  2. 클래스의 기본 생성자 메서드가 필요하다.
+//		  3. 인스턴스 변수의 get, set 메서드
+//		  4. 인스턴스 변수의 제어자는 private
 
+// form 데이터 받아오기 실습
+// 내용 : 로그인을 위해 로그인 페이지에서 아이디와 비밀번호를 입력하고 로그인 버튼을 클릭한다.
+// DTO 클래스 : LoginDto
+// 뷰 페이지 : login.jsp - 로그인 form 페이지
+//			loginResult.jsp - 로그인 후 보여줄 페이지
+// 			loginResult.jsp에 <a href="/test"> 페이지 이동 </a> 넣기
+
+// 요청 주소 및 방식 : 로그인 페이지 - GET 방식, /login
+//					로그인 처리 - POST방식, /login
 

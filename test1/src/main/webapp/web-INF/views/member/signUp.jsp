@@ -11,7 +11,7 @@
 <body>
 	
 	<form method="post" action="/signUp">
-		아이디 : <input type="text" neame="id"><br>
+		아이디 : <input type="text" name="id"><br>
 		비밀번호 : <input type="password" name="pw"> <br>
 		연락처 : <input type="tel" name="tel"> <br>
 		
