@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +14,18 @@
 </head>
 <body>
 	
+	
+
+	<!-- 
+	 컨트롤 : CoffeControl
+	 서비스 : CoffeService
+	 DTO : CoffeDto
+	 DAO : CoffeDao
+	
+	 -->
+	 
+	 
+	 ${ list.get(0).bookTitle }
 	<div id="wrap">
 		<h2> 도서 관리 </h2>
 		
@@ -22,6 +36,20 @@
 		</div>
 		<div id="bookListWrap">
 			<ul id="bookList">
+				<c:forEach var="row" items="${list }">
+					<li class="blist">
+						<span class="title"> ${row.bookTitle } </span>
+						<span class="auth"> ${row.bookAuthor } </span>
+						<span class="bookCode"> ${row.bookId }</span>
+						<span class="category"> ${row.publisher } </span>
+					</li>
+				
+				
+				
+				</c:forEach>
+			
+			
+			
 				<li class="blist">
 					<span class="title"> 나혼자만 레벨업 </span>
 					<span class="auth"> 추공 </span>
@@ -42,9 +70,9 @@
 				</li>
 				<li class="blist">
 					<span class="title">자바의 기초</span>
-					<span class="auth"> </span>
-					<span class="bookCode"></span>
-					<span class="category"></span>
+					<span class="auth">홍길동</span>
+					<span class="bookCode">ㅈc03홍2934</span>
+					<span class="category">컴퓨터 프로그램언어</span>
 				</li>
 				
 			</ul>
