@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class BookClassDto {
+public class bookDto {
 	private int bookId;
 	private String bookTitle;	// 책 제목
 	private String bookAuthor;	// 저자

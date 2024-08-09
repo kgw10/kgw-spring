@@ -7,46 +7,76 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.bookTest.Dto.BookClassDto;
+import com.example.bookTest.Dto.bookDto;
 import com.example.bookTest.control.service.BookService;
 
 @Controller
 public class BookController {
-	
+
 	@Autowired
-	private BookService bookService;
+	private  BookService bookService;
 	
 	@GetMapping("/")
 	public ModelAndView home() {
 		ModelAndView mv = new ModelAndView("index");
 		
-		List<BookClassDto> list = bookService.selectAll();
+		List<bookDto> list = bookService.selectAll();
 		mv.addObject("list", list);
-		
-		
-		
 		
 		return mv;
 	}
 	
 	@GetMapping("/bookWrite")
 	public ModelAndView write() {
-		ModelAndView mv = new ModelAndView("book/bookForm");
+		ModelAndView mv=new ModelAndView("book/bookForm");
 		mv.addObject("count", 5);
 		return mv;
 	}
 	
-	
 	@PostMapping("/enroll")
-	public String write( @ModelAttribute BookClassDto bookDto) {
-		
-		// form 태그 안에 입력한 값은 bookClassDto 클래스의 객체에 저장되어 있다.
-		// 데이터베이스에 저장하려면 BookDto 객체를 DAO에 넘겨서 저장하면 된다.
+	public String write(@ModelAttribute bookDto bookdto) {
+		// form태그안에 입력한 값은 bookDto클래스의 객체에 저장되어있다
+		// 데이터베이스에 저장하려면 bookDto객체를 DAO에 넘겨서 저장하면 된다
 		// 컨트롤 -> service -> DAO
-		bookService.bookSave(bookDto);
+		bookService.bookSave(bookdto);
+		return "redirect:/";
+	}
+	
+	@GetMapping("/book/view")
+	public ModelAndView view(@RequestParam(value="id", required=false, defaultValue="0") int id) {
 		
-		return "index";
+		bookDto data=bookService.getBook(id);
+		
+		System.out.println(data.getBookTitle());
+		
+		if(data==null) data = new bookDto(); //getBook메서드의 반환값으로 null이 저장된다면
+											 //view.jsp에서 변수의 값이 null이기 때문에
+											 //get 메서드 호출이 안되어 오류가 발생한다
+											//오류가 발생되지 않도록 빈 값이 있는 객체할당
+		return new ModelAndView("/book/view").addObject("book", data);
+	}
+	
+	
+	@GetMapping("/book/delete")
+	public String bookRemove( @RequestParam("id") int bid) {
+		
+		bookService.remove(bid);
+		return "redirect:/";
+		
+		// return "<script> alert('삭제되었습니다.'); location.href='/';</script>";
+	}
+	
+	
+	
+	@GetMapping("/book/update")
+	public String bookUpdate( @ModelAttribute bookDto bookdto, @RequestParam("id") int id) {
+		
+		bookdto.setBookId(id);
+		bookService.update(bookdto);
+		
+		return "redirect:/back/view?id="+id;	// 수정 도서의 상세 페이지 이동
 	}
 }
