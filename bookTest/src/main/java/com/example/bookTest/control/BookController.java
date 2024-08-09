@@ -77,6 +77,6 @@ public class BookController {
 		bookdto.setBookId(id);
 		bookService.update(bookdto);
 		
-		return "redirect:/back/view?id="+id;	// 수정 도서의 상세 페이지 이동
+		return "redirect:/book/view?id="+id;	// 수정 도서의 상세 페이지 이동
 	}
 }

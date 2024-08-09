@@ -16,7 +16,7 @@
 <script>
 
 	inputType=["text", "text", "text", "number", "number"];
-	inputName=["bookTitle", "bookAuthor", "publisher", "bookPage", "bookCost"];
+	inputName=["bookTitle", "bookAuthor", "bookCost" "bookPage", "publisher",];
 	
 
 

@@ -18,7 +18,7 @@ $(function(){
 	// 수정 버튼
 	$("#modify").on("click", function() {
 		$.each($(".value"), function(i, v) {	// i - 인덱스, v - i인덱스의 값
-			var text = v.text().trim();
+			var text = $(v).text().trim();
 			if(inputType[i] === "number") {
 				text = text.replace(/[^0-9]/g,"");	// 천단위 콤마 표시 제거
 			}
@@ -34,6 +34,8 @@ $(function(){
 		url = url.replace("delete", "update");	// 주소 변경
 		//		주소 : /book/update	또는 /coffe/update로 변경된다,.
 		$("#fm").attr("action", url);
+		
+		$(this).off("click");
 		
 		$("#mod").on("click", function() {  $("#fm").submit();	});
 		
