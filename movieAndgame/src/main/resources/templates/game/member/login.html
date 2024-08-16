@@ -2,15 +2,34 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{game/basic}">
+	
 <head>
-<title>게임 로그인</title>
-
-
-</head>
+	
+	<title layout:fragment="title">로그인</title>
+	
+	<th:block layout:fragment="css">
+		<link rel="stylesHeet" href="/css/game_login.css">
+	
+	</th:block>
+	
+	<th:block layout:fragment="script">
+		<script src="/js/game_login.js"></script>
+	</th:block>	
+	
+	<th:block th:if="${lose}">
+		<script th:inline="javascript">
+			alert("아이디 또는 비밀번호가 잘못 되었습니다.");
+		</script>
+	
+	</th:block>
+	
+	
+	
+</head>	
 
 	<div layout:fragment="main" id="main">
-		
-			<form method="post" action="/game/signIn" th:object="${gameMember}">
+	
+			<form method="post" action="/game/signIn" th:object="${gameMemberDto}">
 				<div id="formData">
 					<div class="inputField">
 						<input type="text" th:field="*{email}">
@@ -29,7 +48,7 @@
 				<a href="">아이디/비밀번호 찾기</a>
 				<a href="/game/signUp">회원가입</a>
 			</div>
-			
-		
 		</div>
-</html>
+
+
+</html>	

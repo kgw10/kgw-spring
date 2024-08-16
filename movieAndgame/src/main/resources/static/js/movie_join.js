@@ -55,7 +55,19 @@ $(function() {
 			$("#pw2").empty();
 			$("#joinBt").attr("disabled", false);	// 버튼 활성화
 		}
-	})
+	});
+	$("#chk").on("keyup", function() {
+		if( $(this).val() != $("#password").val() ) {
+			$("#pw2").text("비밀번호가 일치하지 않습니다.");
+			$("#pw2").css("color", "red");
+			$("#pw1").empty();
+		} else{
+			$("#pw2").text("비밀번호가 일치합니다.");
+			$("#pw2").css("color", "green");
+			$("#pw1").empty();
+			$("#joinBt").attr("disabled", false);	// 버튼 활성화
+		}
+	});
 	
 	
 	
