@@ -13,14 +13,8 @@
 				<div id="userALogo">
 					<div class="userbox">
 						<span class="loginLink">
-						
-							<th:block th:if="${session.user != null }">
-								<b th:text="${#session.getAttribute('user').name}"></b>
-								<a href="/game/logout">로그아웃</a>
-							
-							</th:block>
-							
-							<a th:href="@{/game/login}">로그인</a>
+							<a th:if="${session.user!=null}" th:href="@{/game/login}">로그아웃</a>
+							<a th:unless="${session.user!=null}" th:href="@{/game/login}">로그인</a>
 						</span>
 						<span class="userService">고객센터</span>
 					</div>

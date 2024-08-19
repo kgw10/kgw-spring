@@ -1,5 +1,7 @@
 package com.movieAndgame.control;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -37,6 +39,8 @@ public class MovieMenuControl {
 	@GetMapping("/review")
 	public String reviewMain(Model model) {
 		
+		List<MovieReviewDto> list = reviewService.reviewlist();
+		model.addAttribute("reviewList", list);
 		
 		return "movie/review/index";
 	}
