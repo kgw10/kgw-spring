@@ -10,7 +10,7 @@
 
 	<div layout:fragment="main" id="main">
 		<h2>리뷰 작성</h2>
-		<form method="post" action="/gameSee/write" th:object="${gameSeeDto}">
+		<form method="post" action="/gamePost/write" th:object="${gamePostDto}">
 			작성자 : <input type="text" th:field="*{writer}" readonly="readonly"> <br>
 		
 			제목 : <input type="text" th:field="*{title}"> <br>
